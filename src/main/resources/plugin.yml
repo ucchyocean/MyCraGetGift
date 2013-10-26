@@ -1,0 +1,30 @@
+name: MyCraGetGift
+main: com.github.ucchyocean.mgg.MyCraGetGift
+version: 0.0.1
+author: ucchy
+description: Send and Get Gifts Plugin for MyCra Server.
+
+commands:
+  getgift:
+    description: Giftを受け取るコマンド
+    aliases: [gift]
+    usage: /<command> - giftを受け取ります
+    permission: getgift.command
+    permission-message: パーミッション "<permission>" が無いため、実行できません。
+
+permissions:
+  getgift.command:
+    description: getgiftコマンドの使用権限
+    default: true
+  getgift.reload:
+    description: getgift reloadコマンドの使用権限
+    default: op
+  getgift.check:
+    description: getgift checkコマンドの使用権限
+    default: op
+  getgift.*:
+    description: getgift reloadコマンドの使用権限
+    children:
+      getgift.command: true
+      getgift.reload: true
+      getgift.check: true

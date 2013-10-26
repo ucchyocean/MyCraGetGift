@@ -1,0 +1,17 @@
+# MyCraGetGift v0.0.1
+# @author     ucchy
+# @license    LGPLv3
+# @copyright  Copyright ucchy 2013
+
+playerOnJoin1: '&cあなた宛ての贈り物があります！'
+playerOnJoin2: '&c贈り物を受け取るには、/getgift コマンドを実行してください。'
+
+giftMessage: '&cメッセージ[%s]'
+
+sendCompleted: '&b贈り物を全て受け取りました！'
+
+sendIncompleted1: '&cインベントリに空きが足りないので、全て受け取れませんでした。'
+sendIncompleted2: '&cインベントリの残りの必要空きスロット数は、%d個 です。'
+sendIncompleted3: '&c空きを作ってから、再度 /getgift を実行してください。'
+
+nothingGift: '&cあなた宛ての贈り物はありません。'
