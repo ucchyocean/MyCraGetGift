@@ -178,13 +178,10 @@ public class MyCraGetGift extends JavaPlugin implements Listener {
             return true;
         }
         
-        // giftデータのリロード
-        handler = new PlayerGiftDataHandler();
-        
         // messageのロード
         Messages.initialize(null);
         
-        sender.sendMessage("giftデータとメッセージデータをリロードしました。");
+        sender.sendMessage("メッセージデータをリロードしました。");
         return true;
     }
     

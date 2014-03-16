@@ -6,10 +6,8 @@
 package com.github.ucchyocean.mgg;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -21,8 +19,6 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerGiftDataHandler {
 
     private static final String FOLDER = "gift";
-    
-    private HashMap<String, PlayerGiftData> gifts;
     private File folder;
     
     /**
@@ -30,32 +26,12 @@ public class PlayerGiftDataHandler {
      */
     public PlayerGiftDataHandler() {
 
-        gifts = new HashMap<String, PlayerGiftData>();
-        
         // giftフォルダが存在するか確認
         folder = new File(MyCraGetGift.pluginDataFolder, FOLDER);
         
+        // フォルダが無いなら作成
         if ( !folder.exists() ) {
-            // フォルダが無いなら作成
             folder.mkdirs();
-            
-        } else {
-            // フォルダが有るなら、中のgiftデータをロード
-            File[] yamlFiles = folder.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    if ( name.endsWith(".yml") ) return true;
-                    return false;
-                }
-            });
-            
-            for ( File file : yamlFiles ) {
-                String filename = file.getName();
-                String name = filename.substring(0, filename.indexOf(".yml"));
-                YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
-                PlayerGiftData data = PlayerGiftData.loadFromSection(config);
-                gifts.put(name, data);
-            }
         }
     }
     
@@ -65,7 +41,9 @@ public class PlayerGiftDataHandler {
      * @return giftがあるかどうか
      */
     public boolean containsName(String name) {
-        return gifts.containsKey(name);
+        
+        File file = new File(folder, name + ".yml");
+        return file.exists();
     }
     
     /**
@@ -74,7 +52,13 @@ public class PlayerGiftDataHandler {
      * @return giftのデータ
      */
     public PlayerGiftData getGiftData(String name) {
-        return gifts.get(name);
+        
+        File file = new File(folder, name + ".yml");
+        if ( !file.exists() ) {
+            return null;
+        }
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        return PlayerGiftData.loadFromSection(config);
     }
     
     /**
@@ -83,12 +67,6 @@ public class PlayerGiftDataHandler {
      */
     public void removeGiftData(String name) {
         
-        // データ削除
-        if ( gifts.containsKey(name) ) {
-            gifts.remove(name);
-        }
-        
-        // ファイル削除
         File file = new File(folder, name + ".yml");
         if ( file.exists() ) {
             file.delete();
@@ -101,9 +79,6 @@ public class PlayerGiftDataHandler {
      * @param data giftのデータ
      */
     public void setGiftData(String name, PlayerGiftData data) {
-        
-        // データ更新
-        gifts.put(name, data);
         
         // ファイル更新
         File file = new File(folder, name + ".yml");

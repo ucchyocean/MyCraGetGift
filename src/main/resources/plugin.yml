@@ -1,6 +1,6 @@
-name: MyCraGetGift
+name: ${project.name}
+version: ${project.version}
 main: com.github.ucchyocean.mgg.MyCraGetGift
-version: 0.0.1
 author: ucchy
 description: Send and Get Gifts Plugin for MyCra Server.
 

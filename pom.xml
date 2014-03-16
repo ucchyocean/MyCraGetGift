@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.ucchyocean</groupId>
   <artifactId>MyCraGetGift</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 
   <licenses>
     <license>
@@ -26,6 +26,12 @@
   
   <build>
     <finalName>${project.artifactId}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -50,7 +56,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
-      <version>1.6.2-R1.0</version>
+      <version>1.7.2-R0.4-SNAPSHOT</version>
     </dependency>
     </dependencies>
 </project>
